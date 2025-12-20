@@ -1,0 +1,106 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-md);
+    background: rgba(1, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--color-glass-border);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--color-text-main);
+    z-index: 1002;
+    /* Above mobile menu */
+}
+
+.logoSpan {
+    color: var(--color-primary-cyan);
+}
+
+.desktopMenu {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.navLink {
+    color: var(--color-text-main);
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.navLink:hover {
+    color: var(--color-primary-cyan);
+    text-shadow: var(--glow-sm);
+}
+
+.mobileToggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-primary-cyan);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1002;
+    padding: 0.5rem;
+}
+
+/* Mobile Drawer Styles */
+.mobileOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--color-bg-deep);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    background-image: var(--grid-pattern);
+}
+
+.mobileLink {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.mobileLink:active {
+    color: var(--color-primary-cyan);
+}
+
+@media (max-width: 768px) {
+    .desktopMenu {
+        display: none;
+    }
+
+    .mobileToggle {
+        display: block;
+    }
+
+    .navbar {
+        padding: 0 var(--spacing-sm);
+    }
+}

@@ -1,0 +1,162 @@
+/* Biotech Guide Actor (Nanobot) */
+.container {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+    /* Let clicks pass through unless on body */
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.muted {
+    opacity: 0.5;
+    filter: grayscale(1);
+}
+
+.droneBody {
+    width: 60px;
+    height: 60px;
+    background: rgba(6, 33, 33, 0.9);
+    border: 1px solid var(--color-primary-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--color-primary-glow);
+    position: relative;
+    cursor: pointer;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s;
+    animation: float 3s ease-in-out infinite;
+}
+
+.droneBody:hover {
+    transform: scale(1.1);
+}
+
+/* Inner lens/eye */
+.droneLens {
+    width: 40px;
+    height: 40px;
+    background: #000;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 255, 213, 0.3);
+}
+
+.droneGlow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--color-primary-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-primary-cyan);
+    top: 30%;
+    left: 30%;
+    animation: blink 4s infinite;
+}
+
+/* Status Text Overlay (Tiny HUD) */
+.droneStatus {
+    position: absolute;
+    bottom: -20px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--color-primary-cyan);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2px 4px;
+    border-radius: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Speech Bubble - Clinical Style */
+.bubble {
+    background: rgba(6, 33, 33, 0.95);
+    border: 1px solid var(--color-primary-cyan);
+    color: var(--color-text-main);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    /* Square edges */
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    max-width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    pointer-events: auto;
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--color-primary-cyan);
+}
+
+.terminalPrefix {
+    color: var(--color-accent-acid);
+}
+
+.muteOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-danger);
+    font-size: 1.5rem;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    96%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    98% {
+        opacity: 0.5;
+        transform: scale(0.1);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

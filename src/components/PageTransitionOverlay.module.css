@@ -1,0 +1,231 @@
+.overlayContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Start from top, fill downwards */
+}
+
+.liquidLayer {
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(180deg, var(--color-primary-cyan) 0%, #004d40 100%),
+        repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.03) 0px,
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px,
+            transparent 10px);
+    transform: translateY(-100%);
+    /* Start hidden above */
+    will-change: transform;
+    box-shadow: 0 0 50px var(--color-primary-cyan);
+    position: relative;
+}
+
+/* The wavy bottom edge of the liquid */
+.waveEdge {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: inherit;
+    clip-path: polygon(0% 0%, 100% 0%,
+            100% 100%,
+            75% 80%,
+            50% 100%,
+            25% 80%,
+            0% 100%);
+    /* Simple jagged edge for now, can be smoother svg later */
+}
+
+/* Keyframes for the full transition sequence */
+/* handled via JS classes usually, or we can use generic classes */
+
+.animatingIn {
+    animation: slideIn 0.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.animatingOut {
+    animation: slideOut 0.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-105%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(105%);
+    }
+}
+
+/* Bubbles */
+.bubble {
+    position: absolute;
+    /* Glassy/Gel look */
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1) 60%, transparent 80%);
+    box-shadow:
+        inset -2px -2px 6px rgba(0, 0, 0, 0.1),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.3),
+        0 0 10px var(--color-primary-cyan);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    bottom: -100px;
+
+    /* Dual animation: Rise (vertical) + Wobble (horizontal) */
+    animation: rise var(--rise-duration, 2s) ease-in infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.8);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-60vh) translateX(15px) scale(1);
+    }
+
+    100% {
+        transform: translateY(-120vh) translateX(-15px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* === FOCUS MODE === */
+.focusContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.focusBackdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 10, 10, 0.6);
+    backdrop-filter: blur(12px);
+}
+
+.focusRing {
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--color-primary-cyan);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 30px var(--color-primary-cyan), inset 0 0 20px rgba(0, 240, 255, 0.2);
+    opacity: 0;
+    transform: scale(3);
+    /* Start expanding inward */
+}
+
+/* Crosshair decorations */
+.focusRing::before,
+.focusRing::after {
+    content: '';
+    position: absolute;
+    background: var(--color-primary-cyan);
+}
+
+.focusRing::before {
+    top: 50%;
+    left: -20px;
+    right: -20px;
+    height: 1px;
+}
+
+.focusRing::after {
+    left: 50%;
+    top: -20px;
+    bottom: -20px;
+    width: 1px;
+}
+
+.ringIn {
+    animation: ringInAnim 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.ringOut {
+    animation: ringOutAnim 0.5s ease-in forwards;
+}
+
+@keyframes ringInAnim {
+    0% {
+        transform: scale(3);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes ringOutAnim {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .liquidLayer {
+        background: black;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        transform: none !important;
+        display: none;
+        /* Logic handled in JS, but safety here */
+    }
+
+    .animatingIn {
+        display: block;
+        opacity: 1;
+        animation: none;
+    }
+
+    .animatingOut {
+        display: block;
+        opacity: 0;
+        animation: none;
+    }
+}

@@ -1,0 +1,163 @@
+@import './styles/variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  margin: 0 0 var(--spacing-sm) 0;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Utilities */
+.text-cyan {
+  color: var(--color-primary-cyan);
+}
+
+.text-acid {
+  color: var(--color-accent-acid);
+}
+
+.text-glow {
+  text-shadow: var(--glow-sm);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.5px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Clinical/Lab Card Style */
+body {
+  background-color: var(--color-bg-deep);
+  background-image: var(--grid-pattern);
+  background-size: 20px 20px;
+  /* Micro-grid size */
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  /* Thinner */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary-teal);
+  border-radius: 0px;
+  /* Square */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-cyan);
+}
+
+.lab-panel {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: var(--glass-blur);
+  position: relative;
+  overflow: hidden;
+}
+
+.lab-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary-cyan);
+  opacity: 0.5;
+}
+
+/* Scanlines Overlay - Lab Monitor Style */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 255, 213, 0.02) 50%,
+      rgba(0, 255, 213, 0.02));
+  background-size: 100% 3px;
+  /* Fine scanlines */
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* Vignette Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--microscope-vignette);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Route Transitions */
+.page-transition {
+  width: 100%;
+}
+
+/* Mobile Viewport Fixes */
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}

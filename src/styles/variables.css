@@ -1,0 +1,92 @@
+:root {
+  /* Colors - Biotech Microscope Palette */
+  --color-bg-deep: #010a0a;
+  /* Ultra dark biological void */
+  --color-bg-dark: #031414;
+  /* Dark organic fluid */
+  --color-bg-slate: #062121;
+  /* Microscope slide dark */
+
+  --color-primary-cyan: #00ffd5;
+  /* Bio-Teal (High visibility) */
+  --color-primary-glow: rgba(0, 255, 213, 0.3);
+
+  --color-secondary-teal: #0d4d4d;
+  /* Sterile Dark Teal */
+
+  --color-accent-acid: #ccff00;
+  /* ACID GREEN (Strictly for highlights) */
+  --color-accent-danger: #ea3323;
+  /* Biohazard Red */
+
+  --color-text-main: #e0faff;
+  /* Clinical White with tint */
+  --color-text-muted: #5c8a8a;
+  /* Desaturated organic grey */
+
+  --color-glass: rgba(6, 33, 33, 0.7);
+  /* Frosted Lab Glass */
+  --color-glass-border: rgba(0, 255, 213, 0.2);
+
+  /* Spacing - Fluid */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: clamp(0.75rem, 2vw, 1rem);
+  --spacing-md: clamp(1.5rem, 4vw, 2rem);
+  --spacing-lg: clamp(3rem, 6vw, 4rem);
+  --spacing-xl: clamp(5rem, 10vw, 8rem);
+
+  /* Typography - Fluid */
+  --font-heading: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --font-size-h1: clamp(2.5rem, 6vw, 4.5rem);
+  --font-size-h2: clamp(1.8rem, 4vw, 3rem);
+  --font-size-h3: clamp(1.4rem, 3vw, 2rem);
+  --font-size-body: clamp(1rem, 1.2vw, 1.125rem);
+
+  /* Components */
+  --nav-height: clamp(70px, 8vh, 80px);
+  --border-radius-sm: 1px;
+  --border-radius-md: 4px;
+  --border-radius-lg: 6px;
+
+  /* Effects */
+  --glow-sm: 0 0 8px var(--color-primary-glow);
+  --glow-md: 0 0 15px var(--color-primary-glow);
+  --glass-blur: blur(10px);
+  --microscope-vignette: radial-gradient(circle at center, transparent 40%, #010a0a 100%);
+
+  /* Textures - Micro-Grid */
+  --grid-pattern:
+    linear-gradient(rgba(0, 255, 213, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 213, 0.05) 1px, transparent 1px);
+}
+
+body {
+  background-color: var(--color-bg-deep);
+  background-image: var(--grid-pattern);
+  background-size: 40px 40px;
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary-teal);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-cyan);
+}
